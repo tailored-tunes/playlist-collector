@@ -1,7 +1,8 @@
-var assert = require("assert"),
+/* global process: true, describe: true, it: true */
+var assert = require('assert'),
     http = require('http');
-var server = require('../web.js');
-var port = process.env.PORT || 5000
+
+var port = process.env.PORT || 5000;
 
 describe('GET /', function(){
 	it('should return 200', function(done) {
@@ -9,6 +10,6 @@ describe('GET /', function(){
 			assert.equal(200, res.statusCode);
 			done();
 		});
-	})
+	});
 });
 
