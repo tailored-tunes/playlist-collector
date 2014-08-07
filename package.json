@@ -20,7 +20,6 @@
 	"devDependencies": {
 		"jshint-stylish": "*",
 		"grunt-blanket": "*",
-		"grunt-cli": "*",
 		"grunt-contrib-clean": "*",
 		"grunt-contrib-copy": "*",
 		"grunt-contrib-jshint": "*",
