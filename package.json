@@ -18,16 +18,19 @@
 		"logfmt": "*"
 	},
 	"devDependencies": {
+		"body-parser": "*",
 		"jshint-stylish": "*",
 		"grunt-blanket": "*",
 		"grunt-cli": "*",
 		"grunt-contrib-clean": "*",
 		"grunt-contrib-copy": "*",
 		"grunt-contrib-jshint": "*",
+		"grunt-contrib-watch": "*",
 		"grunt-mocha-test": "*",
 		"mocha": "*",
 		"supertest": "*",
 		"travis-cov": "*"
+
 	},
 	"engines": {
 		"node": "0.10.x"

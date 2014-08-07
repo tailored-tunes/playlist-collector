@@ -57,12 +57,23 @@ module.exports = function (grunt) {
 					src: [
 						'Gruntfile.js',
 						'src/**/*.js',
+						'test/**/*.js',
 						'!node_modules/**/*'
 					]
 				}
 			}
 		},
 		mochaTest: {
+			quick: {
+				options: {
+					reporter: 'spec',
+					clearRequireCache: true,
+					require: [
+						'src/web.js'
+					]
+				},
+				src: ['test/**/*.js']
+			},
 			test: {
 				options: {
 					reporter: 'spec',
@@ -86,6 +97,20 @@ module.exports = function (grunt) {
 				},
 				src: ['coverage/test/**/*.js']
 			}
+		},
+		watch: {
+			js: {
+				files: [
+					'src/**/*.js',
+					'test/**/*.js'
+				],
+				tasks: ['jshint', 'mochaTest:quick'],
+				options: {
+					spawn: true,
+					interrupt: true,
+					debounceDelay: 250
+				}
+			}
 		}
 	});
 
@@ -93,6 +118,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-jshint');  // Checks if javascript codes are nice or not
+	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-mocha-test');	     // Runs mocha tests
 
 	grunt.registerTask('default', [
