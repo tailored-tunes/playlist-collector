@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+- '0.10'
+install:
+- npm install
+before_deploy:
+- git fetch --unshallow
+deploy:
+  provider: heroku
+  api_key:
+    secure: FHqGxVnITkGSuBW3frKFk+Q8RLuzEgppAKCDsJ+FN+jN7cAYZfEzviSKtAmhv6S+ZRUYwEXy1twV3zW3nIthvGojeicupDWo/F3/R407t77xP3xLH/sxbbwcwL5+xkP0mn3dqb5U3W5xzd4++3J2Pp3ywDIjzsrOoY5FzENy884=
+  app: playlist-collector-node1
+  on:
+    repo: tailored-tunes/playlist-collector
+    branch: master
+
+notifications:
+  slack: tatu:IPs950X3v1BJ9MOz7SGQuJw6
