@@ -3,8 +3,12 @@
   "version": "0.0.1",
   "description": "Tailored Tunes playlist collector",
   "main": "web.js",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/tailored-tunes/playlist-collector.git"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
     "engines": {
     "node": "0.10.x"
@@ -12,5 +16,9 @@
   "dependencies": {
     "express" : "*",
     "logfmt" : "*"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "supertest": "*"
   }
 }
