@@ -45,6 +45,18 @@ describe('GET request', function () {
 	});
 });
 
+describe('Status request', function () {
+	it('should report 200', function (done) {
+		req.get('/status').end(function (err, res) {
+			if (err) {
+				throw err;
+			}
+			assert.equal(res.status, 200);
+			done();
+		});
+	});
+});
+
 describe('POST correct data', function () {
 	it('should return 200', function (done) {
 		assertStatus(correctMessage, 200, done);
@@ -89,3 +101,4 @@ describe('POST incorrect data', function () {
 		assertStatus(message, 400, done);
 	});
 });
+
