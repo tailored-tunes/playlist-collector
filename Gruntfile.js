@@ -130,5 +130,12 @@ module.exports = function (grunt) {
 		'test:js'
 	]);
 
-	grunt.registerTask('test:js', ['clean', 'blanket', 'copy', 'mochaTest']);
+	grunt.registerTask('test:js', [
+		'clean',
+		'blanket',
+		'copy',
+		'mochaTest:test',
+		'mochaTest:coverage',
+		'mochaTest:travis-cov'
+	]);
 };
