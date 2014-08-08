@@ -7,7 +7,7 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-var messageHandler = require('./handlers/Message');
+var messageHandler = require('./handlers/message');
 app.post('/', messageHandler.create);
 
 var port = Number(process.env.PORT || 5000);
