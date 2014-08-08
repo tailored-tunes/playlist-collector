@@ -2,7 +2,7 @@
 	"name": "playlist-collector",
 	"version": "0.0.1",
 	"description": "Tailored Tunes playlist collector",
-	"main": "web.js",
+	"main": "server.js",
 	"repository": {
 		"type": "git",
 		"url": "http://github.com/tailored-tunes/playlist-collector.git"
@@ -18,16 +18,19 @@
 		"logfmt": "*"
 	},
 	"devDependencies": {
+		"body-parser": "*",
 		"jshint-stylish": "*",
 		"grunt-blanket": "*",
 		"grunt-cli": "*",
 		"grunt-contrib-clean": "*",
 		"grunt-contrib-copy": "*",
 		"grunt-contrib-jshint": "*",
+		"grunt-contrib-watch": "*",
 		"grunt-mocha-test": "*",
 		"mocha": "*",
 		"supertest": "*",
 		"travis-cov": "*"
+
 	},
 	"engines": {
 		"node": "0.10.x"
