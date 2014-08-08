@@ -46,6 +46,9 @@ Time of message creation on the user's side
 #### If anything goes wrong on the server side
 `500 INTERNAL SERVER ERROR`
 
+## Heartbeat
+You can check if the node is alive by issueing a `GET` to `/status`
+
 ## Configuration
 
 All configuration parameters must come from the environment the software is
