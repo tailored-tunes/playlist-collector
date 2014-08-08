@@ -1,9 +1,10 @@
-/* global process: true, describe: true, it: true */
+/* global process: true, before: true, describe: true, it: true */
 var assert = require('assert'),
-	http = require('http');
+	request = require('supertest');
 
 var port = process.env.PORT || 5000;
 
+var req;
 
 var correctMessage = {
 	'source': 'deezer',
@@ -12,39 +13,35 @@ var correctMessage = {
 	'time': 1407248924
 };
 
-var assertStatus = function(message, status, done) {
-	var httpOptions = {
-		hostname: 'localhost',
-		port: port,
-		path: '/',
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	};
+before(function(done) {
+	req = request('http://localhost:'+port);
+	done();
+});
 
-	var req = http.request(httpOptions, function (res) {
-		assert.equal(status, res.statusCode);
-		done();
-	});
-	req.write(JSON.stringify(message));
-	req.end();
+
+var assertStatus = function (message, status, done) {
+	req.post('/')
+		.set('Content-Type', 'application/json')
+		.send(JSON.stringify(message))
+		.end(function (err, res) {
+			if (err) {
+				throw err;
+			}
+			assert.equal(status, res.status);
+			done();
+		});
 };
 
 
-describe('GET request', function(){
-	it('should not be allowed', function(done){
-
-		var req = http.request({
-			hostname: 'localhost',
-			port: port,
-			path: '/',
-			method: 'GET'
-		}, function (res) {
-			assert.equal(400, res.statusCode);
+describe('GET request', function () {
+	it('should not be allowed', function (done) {
+		req.get('/').end(function (err, res) {
+			if (err) {
+				throw err;
+			}
+			assert.equal(res.status, 404);
 			done();
 		});
-		req.end();
 	});
 });
 
@@ -54,8 +51,8 @@ describe('POST correct data', function () {
 	});
 });
 
-describe('POST without source', function(){
-	it('should return 400', function (done){
+describe('POST incorrect data', function () {
+	it('should return 400 without source', function (done) {
 		var message = {
 			'id': 'xyz',
 			'userToken': 'abc123',
@@ -63,10 +60,8 @@ describe('POST without source', function(){
 		};
 		assertStatus(message, 400, done);
 	});
-});
 
-describe('POST without id', function(){
-	it('should return 400', function (done){
+	it('should return 400 without id', function (done) {
 		var message = {
 			'source': 'deezer',
 			'userToken': 'abc123',
@@ -74,10 +69,8 @@ describe('POST without id', function(){
 		};
 		assertStatus(message, 400, done);
 	});
-});
 
-describe('POST without token', function(){
-	it('should return 400', function (done){
+	it('should return 400 without userToken', function (done) {
 		var message = {
 			'source': 'deezer',
 			'id': 'xyz',
@@ -85,10 +78,8 @@ describe('POST without token', function(){
 		};
 		assertStatus(message, 400, done);
 	});
-});
 
-describe('POST without time', function(){
-	it('should return 400', function (done){
+	it('should return 400 without time', function (done) {
 		var message = {
 			'source': 'deezer',
 			'id': 'xyz',

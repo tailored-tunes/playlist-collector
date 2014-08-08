@@ -2,7 +2,7 @@
 	"name": "playlist-collector",
 	"version": "0.0.1",
 	"description": "Tailored Tunes playlist collector",
-	"main": "web.js",
+	"main": "server.js",
 	"repository": {
 		"type": "git",
 		"url": "http://github.com/tailored-tunes/playlist-collector.git"

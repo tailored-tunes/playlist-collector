@@ -47,6 +47,7 @@ module.exports = function (grunt) {
 					'jquery': true,
 					'globals': {
 						'require': false,
+						'exports': false,
 						'define': false,
 						's': false,
 						'Swipe': false
@@ -77,6 +78,7 @@ module.exports = function (grunt) {
 			test: {
 				options: {
 					reporter: 'spec',
+					clearRequireCache: true,
 					require: [
 						'coverage/src/web.js'
 					]
