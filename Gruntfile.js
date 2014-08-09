@@ -1,4 +1,3 @@
-/* global module: false, process: false */
 module.exports = function (grunt) {
 	var isProd = (grunt.option('production') !== undefined) ? Boolean(grunt.option('production')) : process.env.GRUNT_ISPROD === '1';
 
@@ -24,6 +23,21 @@ module.exports = function (grunt) {
 				dest: 'coverage/'
 			}
 		},
+		env: {
+			defaultPort: {
+				add: {
+					PORT: 5001
+				}
+			},
+			run: {
+				src : 'dev.json'
+			}
+		},
+		execute: {
+			target: {
+				src: ['src/web.js']
+			}
+		},
 		jshint: {
 			js: {
 				options: {
@@ -47,6 +61,8 @@ module.exports = function (grunt) {
 					'jquery': true,
 					'globals': {
 						'require': false,
+						'process': false,
+						'module': false,
 						'exports': false,
 						'define': false,
 						's': false,
@@ -106,7 +122,7 @@ module.exports = function (grunt) {
 					'src/**/*.js',
 					'test/**/*.js'
 				],
-				tasks: ['jshint', 'mochaTest:quick'],
+				tasks: ['verify'],
 				options: {
 					spawn: true,
 					interrupt: true,
@@ -121,6 +137,8 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-jshint');  // Checks if javascript codes are nice or not
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-env');
+	grunt.loadNpmTasks('grunt-execute');
 	grunt.loadNpmTasks('grunt-mocha-test');	     // Runs mocha tests
 
 	grunt.registerTask('default', [
@@ -136,8 +154,15 @@ module.exports = function (grunt) {
 		'clean',
 		'blanket',
 		'copy',
+		'env',
 		'mochaTest:test',
 		'mochaTest:coverage',
 		'mochaTest:travis-cov'
 	]);
+
+	grunt.registerTask('run', [
+		'env:run',
+		'execute'
+	]);
+
 };

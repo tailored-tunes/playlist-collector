@@ -15,10 +15,13 @@
 	"dependencies": {
 		"express": "*",
 		"grunt": "*",
-		"logfmt": "*"
+		"grunt-env": "*",
+		"logfmt": "*",
+		"aws-sdk": "*"
 	},
 	"devDependencies": {
 		"body-parser": "*",
+		"chance": "*",
 		"jshint-stylish": "*",
 		"grunt-blanket": "*",
 		"grunt-cli": "*",
@@ -26,8 +29,12 @@
 		"grunt-contrib-copy": "*",
 		"grunt-contrib-jshint": "*",
 		"grunt-contrib-watch": "*",
+		"grunt-env": "*",
+		"grunt-execute": "*",
 		"grunt-mocha-test": "*",
 		"mocha": "*",
+		"sinon": "*",
+		"sinon-mocha": "*",
 		"supertest": "*",
 		"travis-cov": "*"
 

@@ -1,10 +1,6 @@
-/* global process: true, before: true, describe: true, it: true */
+/* global process: true, beforeEach: true, describe: true, it: true */
 var assert = require('assert'),
 	request = require('supertest');
-
-var port = process.env.PORT || 5000;
-
-var req;
 
 var correctMessage = {
 	'source': 'deezer',
@@ -13,13 +9,15 @@ var correctMessage = {
 	'time': 1407248924
 };
 
-before(function(done) {
-	req = request('http://localhost:'+port);
+
+beforeEach(function(done) {
+	this.port = Number(process.env.PORT);
+	this.req = request('http://localhost:'+this.port);
 	done();
 });
 
 
-var assertStatus = function (message, status, done) {
+var assertStatus = function (req, message, status, done) {
 	req.post('/')
 		.set('Content-Type', 'application/json')
 		.send(JSON.stringify(message))
@@ -35,7 +33,7 @@ var assertStatus = function (message, status, done) {
 
 describe('GET request', function () {
 	it('should not be allowed', function (done) {
-		req.get('/').end(function (err, res) {
+		this.req.get('/').end(function (err, res) {
 			if (err) {
 				throw err;
 			}
@@ -47,7 +45,7 @@ describe('GET request', function () {
 
 describe('Status request', function () {
 	it('should report 200', function (done) {
-		req.get('/status').end(function (err, res) {
+		this.req.get('/status').end(function (err, res) {
 			if (err) {
 				throw err;
 			}
@@ -59,7 +57,7 @@ describe('Status request', function () {
 
 describe('POST correct data', function () {
 	it('should return 200', function (done) {
-		assertStatus(correctMessage, 200, done);
+		assertStatus(this.req, correctMessage, 200, done);
 	});
 });
 
@@ -70,7 +68,7 @@ describe('POST incorrect data', function () {
 			'userToken': 'abc123',
 			'time': 1407248924
 		};
-		assertStatus(message, 400, done);
+		assertStatus(this.req, message, 400, done);
 	});
 
 	it('should return 400 without id', function (done) {
@@ -79,7 +77,7 @@ describe('POST incorrect data', function () {
 			'userToken': 'abc123',
 			'time': 1407248924
 		};
-		assertStatus(message, 400, done);
+		assertStatus(this.req, message, 400, done);
 	});
 
 	it('should return 400 without userToken', function (done) {
@@ -88,7 +86,7 @@ describe('POST incorrect data', function () {
 			'id': 'xyz',
 			'time': 1407248924
 		};
-		assertStatus(message, 400, done);
+		assertStatus(this.req, message, 400, done);
 	});
 
 	it('should return 400 without time', function (done) {
@@ -98,7 +96,7 @@ describe('POST incorrect data', function () {
 			'userToken': 'abc123'
 		};
 
-		assertStatus(message, 400, done);
+		assertStatus(this.req, message, 400, done);
 	});
 });
 
