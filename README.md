@@ -106,5 +106,7 @@ set the variables as follows:
 ```
 
 ## Testing
-
 `grunt verify`
+
+## Contributing
+Please refer to our [Contributing guidelines](CONTRIBUTING.md)
