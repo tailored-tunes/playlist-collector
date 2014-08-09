@@ -16,10 +16,10 @@ The collector accepts data via `POST` only to the root domain
 
 ```json
 {
-  "source": "deezer",
   "id": "xyz",
-  "userToken": "abc123",
+  "source": "deezer",
   "time": 1407248924
+  "userToken": "abc123",
 }
 ```
 
@@ -96,8 +96,8 @@ set the variables as follows:
 
 ```json
 {
-	"AWS_SECRET_ACCESS_KEY": "",
 	"AWS_ACCESS_KEY_ID": "",
+	"AWS_SECRET_ACCESS_KEY": "",
 	"PORT": 5001,
 	"SNS_TOPIC": "",
 	"RETRY_COUNT": 3
