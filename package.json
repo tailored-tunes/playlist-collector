@@ -13,6 +13,7 @@
 		}
 	},
 	"dependencies": {
+		"body-parser": "*",
 		"express": "*",
 		"grunt": "*",
 		"grunt-env": "*",
@@ -20,7 +21,6 @@
 		"aws-sdk": "*"
 	},
 	"devDependencies": {
-		"body-parser": "*",
 		"chance": "*",
 		"jshint-stylish": "*",
 		"grunt-blanket": "*",
