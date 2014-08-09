@@ -28,6 +28,14 @@ module.exports = function (grunt) {
 				add: {
 					PORT: 5001
 				}
+			},
+			run: {
+				src : 'dev.json'
+			}
+		},
+		execute: {
+			target: {
+				src: ['src/web.js']
 			}
 		},
 		jshint: {
@@ -130,6 +138,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');  // Checks if javascript codes are nice or not
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-env');
+	grunt.loadNpmTasks('grunt-execute');
 	grunt.loadNpmTasks('grunt-mocha-test');	     // Runs mocha tests
 
 	grunt.registerTask('default', [
@@ -150,4 +159,10 @@ module.exports = function (grunt) {
 		'mochaTest:coverage',
 		'mochaTest:travis-cov'
 	]);
+
+	grunt.registerTask('run', [
+		'env:run',
+		'execute'
+	]);
+
 };

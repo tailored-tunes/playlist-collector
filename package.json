@@ -29,6 +29,8 @@
 		"grunt-contrib-copy": "*",
 		"grunt-contrib-jshint": "*",
 		"grunt-contrib-watch": "*",
+		"grunt-env": "*",
+		"grunt-execute": "*",
 		"grunt-mocha-test": "*",
 		"mocha": "*",
 		"sinon": "*",

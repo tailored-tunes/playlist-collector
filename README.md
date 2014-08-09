@@ -56,9 +56,6 @@ installed to.
 
 ### Parameters:
 
-#### SNS_TOPIC
-The SNS topic to publish the information to
-
 #### AWS_ACCESS_KEY_ID
 The amazon aws access key necessary to publish to the [SNS_TOPIC](#SNS_TOPIC)
 
@@ -70,6 +67,9 @@ The secret key paired to the [access key](#AWS_ACCESS_KEY_ID)
 
 #### RETRY_COUNT
 If the SNS publishing fails, how many times should we retry before failing
+
+#### SNS_TOPIC
+The topic arn to publish messages to
 
 ## Metrics
 
