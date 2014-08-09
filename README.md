@@ -86,3 +86,24 @@ The metric we care about are the following:
 ### Metric url
 
 `/metrics`
+
+## Running locally
+
+You can run the collector by running `grunt run`
+
+To set up environment variables automatically, create a file called `dev.json` in the project root and
+set the variables as follows:
+```
+{
+		"AWS_SECRET_ACCESS_KEY": "",
+		"AWS_ACCESS_KEY_ID": "",
+		"PORT": 5001,
+		"SNS_TOPIC": "",
+		"RETRY_COUNT": 3
+}
+
+```
+
+## Testing
+
+`grunt verify`
