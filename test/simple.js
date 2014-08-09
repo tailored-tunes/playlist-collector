@@ -2,7 +2,7 @@
 var assert = require('assert'),
 	request = require('supertest');
 
-var port = process.env.PORT || 5000;
+var port = Number(process.env.PORT);
 
 var req;
 

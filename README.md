@@ -62,6 +62,9 @@ The SNS topic to publish the information to
 #### AWS_ACCESS_KEY_ID
 The amazon aws access key necessary to publish to the [SNS_TOPIC](#SNS_TOPIC)
 
+#### AWS_REGION
+The amazon region to use
+
 #### AWS_SECRET_ACCESS_KEY
 The secret key paired to the [access key](#AWS_ACCESS_KEY_ID)
 

@@ -15,10 +15,13 @@
 	"dependencies": {
 		"express": "*",
 		"grunt": "*",
-		"logfmt": "*"
+		"grunt-env": "*",
+		"logfmt": "*",
+		"aws-sdk": "*"
 	},
 	"devDependencies": {
 		"body-parser": "*",
+		"chance": "*",
 		"jshint-stylish": "*",
 		"grunt-blanket": "*",
 		"grunt-cli": "*",
@@ -28,6 +31,8 @@
 		"grunt-contrib-watch": "*",
 		"grunt-mocha-test": "*",
 		"mocha": "*",
+		"sinon": "*",
+		"sinon-mocha": "*",
 		"supertest": "*",
 		"travis-cov": "*"
 
