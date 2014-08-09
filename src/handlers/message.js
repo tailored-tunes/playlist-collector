@@ -1,4 +1,4 @@
-module.exports = function () {
+module.exports = function (publisher) {
 	return {
 		create: function (req, res) {
 			var required = ['source', 'id', 'userToken', 'time'];
@@ -8,6 +8,7 @@ module.exports = function () {
 				}
 			});
 			res.status(200).end();
+			publisher.store(req.body);
 		}
 	};
 };
