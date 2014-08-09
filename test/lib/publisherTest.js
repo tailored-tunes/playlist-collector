@@ -1,24 +1,23 @@
-/* global describe: true, it: true */
+/* global describe: true, it: true, beforeEach: true */
 //var assert = require('assert');
 var sinon = require('sinon');
 var chance = require('chance').Chance();
 
+var mockSnsApi = { publish: function () {} };
+var mockSns, message;
+
+beforeEach(function() {
+	mockSns = sinon.mock(mockSnsApi);
+	message = chance.string();
+});
+
 describe('The publisher', function() {
-	it('should publish stuff', function(done) {
-		var mockSnsApi = { publish: function () {} };
-		var mockSns = sinon.mock(mockSnsApi);
-		var expectation = mockSns.expects('publish');
-
-		var message = chance.string();
-
-		expectation.once().withArgs(message);
+	it('should call the 3rd party publisher with the correct message', function(done) {
+		mockSns.expects('publish').once().withArgs(message);
 
 		var publisher = require('../../src/lib/publisher')(mockSnsApi);
 
-		publisher.publish(message);
-
-		expectation.callArgWith(1, false, 0);
-		expectation.callArgWith(1, true, 0);
+		publisher.store(message);
 
 		mockSns.verify();
 
