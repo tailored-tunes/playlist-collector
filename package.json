@@ -33,6 +33,7 @@
 		"grunt-execute": "*",
 		"grunt-mocha-test": "*",
 		"mocha": "*",
+		"node-localstorage": "*",
 		"sinon": "*",
 		"sinon-mocha": "*",
 		"supertest": "*",
