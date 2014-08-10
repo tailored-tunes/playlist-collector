@@ -2,12 +2,7 @@
 var assert = require('assert'),
 	request = require('supertest');
 
-var correctMessage = {
-	'source': 'deezer',
-	'id': 'xyz',
-	'userToken': 'abc123',
-	'time': 1407248924
-};
+var mockedMessages = require('./mockedData/messages');
 
 
 beforeEach(function(done) {
@@ -57,46 +52,24 @@ describe('Status request', function () {
 
 describe('POST correct data', function () {
 	it('should return 200', function (done) {
-		assertStatus(this.req, correctMessage, 200, done);
+		assertStatus(this.req, mockedMessages.correctMessage, 200, done);
 	});
 });
 
 describe('POST incorrect data', function () {
 	it('should return 400 without source', function (done) {
-		var message = {
-			'id': 'xyz',
-			'userToken': 'abc123',
-			'time': 1407248924
-		};
-		assertStatus(this.req, message, 400, done);
+		assertStatus(this.req, mockedMessages.missingSourceMessage, 400, done);
 	});
 
 	it('should return 400 without id', function (done) {
-		var message = {
-			'source': 'deezer',
-			'userToken': 'abc123',
-			'time': 1407248924
-		};
-		assertStatus(this.req, message, 400, done);
+		assertStatus(this.req, mockedMessages.missingIdMessage, 400, done);
 	});
 
 	it('should return 400 without userToken', function (done) {
-		var message = {
-			'source': 'deezer',
-			'id': 'xyz',
-			'time': 1407248924
-		};
-		assertStatus(this.req, message, 400, done);
+		assertStatus(this.req, mockedMessages.missingUserTokenMessage, 400, done);
 	});
 
 	it('should return 400 without time', function (done) {
-		var message = {
-			'source': 'deezer',
-			'id': 'xyz',
-			'userToken': 'abc123'
-		};
-
-		assertStatus(this.req, message, 400, done);
+		assertStatus(this.req, mockedMessages.missingTimeMessage, 400, done);
 	});
 });
-
