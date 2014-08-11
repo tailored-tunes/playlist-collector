@@ -51,8 +51,8 @@ describe('Status request', function () {
 });
 
 describe('POST correct data', function () {
-	it('should return 200', function (done) {
-		assertStatus(this.req, mockedMessages.correctMessage, 200, done);
+	it('should return 202', function (done) {
+		assertStatus(this.req, mockedMessages.correctMessage, 202, done);
 	});
 });
 

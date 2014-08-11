@@ -38,7 +38,7 @@ Time of message creation on the user's side
 ### Response codes
 
 #### Upon success
-`200 OK`
+`202 ACCEPTED`
 
 #### Upon malformed message
 `400 BAD REQUEST`
