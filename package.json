@@ -13,6 +13,7 @@
 		}
 	},
 	"dependencies": {
+		"async": "*",
 		"body-parser": "*",
 		"express": "*",
 		"grunt": "*",

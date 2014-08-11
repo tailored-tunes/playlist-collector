@@ -1,4 +1,3 @@
-/* global console: true, process: true */
 var express = require('express');
 var bodyParser = require('body-parser');
 
@@ -13,4 +12,3 @@ app.use(routes);
 
 var port = Number(process.env.PORT || 5000);
 app.listen(port);
-console.log('Listening on ' + port);
