@@ -1,5 +1,10 @@
 module.exports = function (s) {
-	var storage = s || localStorage;
+	var storage = s;
+
+
+	if (!(typeof localStorage === 'undefined' || localStorage === null)) {
+		storage = storage || localStorage;
+	}
 
 	if (typeof storage === 'undefined' || storage === null) {
 		var LocalStorage = require('node-localstorage').LocalStorage;
