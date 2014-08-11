@@ -13,6 +13,7 @@
 		}
 	},
 	"dependencies": {
+		"async": "*",
 		"body-parser": "*",
 		"express": "*",
 		"grunt": "*",
@@ -33,6 +34,7 @@
 		"grunt-execute": "*",
 		"grunt-mocha-test": "*",
 		"mocha": "*",
+		"node-localstorage": "*",
 		"sinon": "*",
 		"sinon-mocha": "*",
 		"supertest": "*",

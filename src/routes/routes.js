@@ -1,7 +1,7 @@
 var routes = require('express').Router();
 var publisher = require('../lib/aws.js');
-
-var messageHandler = require('./handlers/message')(publisher);
+var q = require('../lib/queue')(publisher);
+var messageHandler = require('./handlers/message')(q);
 var statusHandler = require('./handlers/status');
 
 routes.post('/', messageHandler.create);
