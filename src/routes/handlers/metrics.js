@@ -1,4 +1,4 @@
-module.exports = function(db) {
+module.exports = function(db, clock) {
 	function getData(key) {
 		return db.get(key) || 0;
 	}
@@ -12,7 +12,8 @@ module.exports = function(db) {
 				'invalid': getData('invalid'),
 				'attempts': getData('attempts'),
 				'success': getData('success'),
-				'fail': getData('fail')
+				'fail': getData('fail'),
+				'uptime': clock.uptime()
 			};
 			res.set('Content-Type', 'application/json');
 			res.status(200).end(JSON.stringify(result));
