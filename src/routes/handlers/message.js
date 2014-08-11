@@ -9,7 +9,7 @@ module.exports = function (q) {
 			});
 
 			q.push(req.body, function() {});
-			res.status(200).end();
+			res.status(202).end();
 
 		}
 	};
