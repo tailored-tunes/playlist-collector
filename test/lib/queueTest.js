@@ -1,4 +1,5 @@
 /* global describe: true, it: true, beforeEach: true */
+var assert = require('assert');
 var sinon = require('sinon');
 var chance = require('chance').Chance();
 
@@ -26,6 +27,16 @@ describe('The queue', function(){
 				done(true);
 			}
 		});
+	});
+
+	it('should have a size', function(done){
+
+		var q = require('../../src/lib/queue')(this.mockPublisher);
+		assert.equal(q.size(), 0);
+		q.push('a', sinon.stub());
+		assert.equal(q.size(), 1);
+
+		done();
 	});
 });
 

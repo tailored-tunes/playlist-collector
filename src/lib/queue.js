@@ -8,11 +8,15 @@ module.exports = function(publisher) {
 				callback();
 			}
 		});
-	}, 100);
+	}, 10);
 
 	return {
 		push: function(data, callback) {
 			q.push(data, callback);
+		},
+
+		size: function() {
+			return q.length();
 		}
 	};
 };

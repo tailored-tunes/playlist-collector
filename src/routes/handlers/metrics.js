@@ -1,4 +1,4 @@
-module.exports = function(db, clock) {
+module.exports = function(db, clock, q) {
 	function getData(key) {
 		return db.get(key) || 0;
 	}
@@ -7,6 +7,7 @@ module.exports = function(db, clock) {
 		data: function(req, res) {
 
 			var result = {
+				'qsize': q.size(),
 				'total': getData('total'),
 				'valid': getData('valid'),
 				'invalid': getData('invalid'),
