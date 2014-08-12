@@ -18,8 +18,8 @@ The collector accepts data via `POST` only to the root domain
 {
   "id": "xyz",
   "source": "deezer",
-  "time": 1407248924
-  "userToken": "abc123",
+  "time": 1407248924,
+  "userToken": "abc123"
 }
 ```
 
@@ -78,10 +78,9 @@ The metric we care about are the following:
 - total number of messages received
 - number of valid messages
 - number of invalid messages
-- number of storage attempts
 - number of successful storages
 - number of failed storages (after the retry policy failed)
-- uptime
+- uptime (milliseconds)
 
 ### Metric url
 

@@ -12,17 +12,12 @@ beforeEach(function () {
 
 });
 
-
-//- uptime
-
-
 describe('The metrics handler', function () {
 	it('should return the metrics', function (done) {
 
 		var total = chance.integer();
 		var valid = chance.integer();
 		var invalid = chance.integer();
-		var attempts = chance.integer();
 		var success = chance.integer();
 		var fail = chance.integer();
 		var uptime = chance.integer();
@@ -30,7 +25,6 @@ describe('The metrics handler', function () {
 		this.db.expects('get').withExactArgs('total').returns(total).once();
 		this.db.expects('get').withExactArgs('valid').returns(valid).once();
 		this.db.expects('get').withExactArgs('invalid').returns(invalid).once();
-		this.db.expects('get').withExactArgs('attempts').returns(attempts).once();
 		this.db.expects('get').withExactArgs('success').returns(success).once();
 		this.db.expects('get').withExactArgs('fail').returns(fail).once();
 
@@ -38,7 +32,6 @@ describe('The metrics handler', function () {
 			'total': total,
 			'valid': valid,
 			'invalid': invalid,
-			'attempts': attempts,
 			'success': success,
 			'fail': fail,
 			'uptime': uptime
