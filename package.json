@@ -14,12 +14,13 @@
 	},
 	"dependencies": {
 		"async": "*",
+		"aws-sdk": "*",
 		"body-parser": "*",
 		"express": "*",
 		"grunt": "*",
 		"grunt-env": "*",
 		"logfmt": "*",
-		"aws-sdk": "*"
+		"node-localstorage": "*"
 	},
 	"devDependencies": {
 		"chance": "*",
@@ -35,7 +36,6 @@
 		"grunt-mocha-test": "*",
 		"grunt-sloc": "^0.5.2",
 		"mocha": "*",
-		"node-localstorage": "*",
 		"sinon": "*",
 		"sinon-mocha": "*",
 		"supertest": "*",
