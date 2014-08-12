@@ -33,13 +33,13 @@
 		"grunt-env": "*",
 		"grunt-execute": "*",
 		"grunt-mocha-test": "*",
+		"grunt-sloc": "^0.5.2",
 		"mocha": "*",
 		"node-localstorage": "*",
 		"sinon": "*",
 		"sinon-mocha": "*",
 		"supertest": "*",
 		"travis-cov": "*"
-
 	},
 	"engines": {
 		"node": "0.10.x"

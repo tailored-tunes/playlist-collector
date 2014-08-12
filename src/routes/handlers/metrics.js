@@ -10,7 +10,6 @@ module.exports = function(db, clock) {
 				'total': getData('total'),
 				'valid': getData('valid'),
 				'invalid': getData('invalid'),
-				'attempts': getData('attempts'),
 				'success': getData('success'),
 				'fail': getData('fail'),
 				'uptime': clock.uptime()

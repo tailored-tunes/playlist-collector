@@ -30,7 +30,7 @@ module.exports = function (grunt) {
 				}
 			},
 			run: {
-				src : 'dev.json'
+				src: 'dev.json'
 			}
 		},
 		execute: {
@@ -116,6 +116,13 @@ module.exports = function (grunt) {
 				src: ['coverage/test/**/*.js']
 			}
 		},
+		sloc: {
+			'dev': {
+				files: {
+					'.': [ 'src/**/*.js', 'test/**/*.js' ]
+				}
+			}
+		},
 		watch: {
 			js: {
 				files: [
@@ -140,9 +147,11 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-env');
 	grunt.loadNpmTasks('grunt-execute');
 	grunt.loadNpmTasks('grunt-mocha-test');	     // Runs mocha tests
+	grunt.loadNpmTasks('grunt-sloc');
 
 	grunt.registerTask('default', [
-		'verify'
+		'verify',
+		'sloc'
 	]);
 
 	grunt.registerTask('verify', [
