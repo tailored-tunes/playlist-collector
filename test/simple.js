@@ -50,6 +50,19 @@ describe('Status request', function () {
 	});
 });
 
+describe('Metrics request', function () {
+	it('should report 200', function (done) {
+		this.req.get('/metrics').end(function (err, res) {
+			if (err) {
+				throw err;
+			}
+			assert.equal(res.status, 200);
+			done();
+		});
+	});
+});
+
+
 describe('POST correct data', function () {
 	it('should return 202', function (done) {
 		assertStatus(this.req, mockedMessages.correctMessage, 202, done);

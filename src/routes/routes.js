@@ -6,7 +6,7 @@ var metrics = require('../lib/metrics')(db);
 var clock = require('../lib/clock')(new Date().getTime());
 var messageHandler = require('./handlers/message')(q, metrics);
 var statusHandler = require('./handlers/status');
-var metricsHandler = require('./handlers/metrics')(db, clock);
+var metricsHandler = require('./handlers/metrics')(db, clock, q);
 
 routes.post('/', messageHandler.create);
 routes.get('/status', statusHandler.status);

@@ -10,6 +10,9 @@ module.exports = function (s) {
 		var LocalStorage = require('node-localstorage').LocalStorage;
 		storage = new LocalStorage('./db');
 	}
+
+	storage.clear();
+
 	return {
 		get: function (key) {
 			return storage.getItem(key);

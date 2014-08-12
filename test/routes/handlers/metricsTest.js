@@ -5,6 +5,7 @@ var chance = require('chance').Chance();
 beforeEach(function () {
 	this.resApi = {status: function () {}, end:function(){}, set:function(){}};
 	this.reqApi = {body: ''};
+	this.qApi = {size: function(){}};
 	this.clockApi = {uptime:function(){}};
 	this.mockDB = {get: function () {
 	}};
@@ -15,6 +16,7 @@ beforeEach(function () {
 describe('The metrics handler', function () {
 	it('should return the metrics', function (done) {
 
+		var qsize = chance.integer();
 		var total = chance.integer();
 		var valid = chance.integer();
 		var invalid = chance.integer();
@@ -29,6 +31,7 @@ describe('The metrics handler', function () {
 		this.db.expects('get').withExactArgs('fail').returns(fail).once();
 
 		var expectedMessage = JSON.stringify({
+			'qsize': qsize,
 			'total': total,
 			'valid': valid,
 			'invalid': invalid,
@@ -44,14 +47,16 @@ describe('The metrics handler', function () {
 		response.expects('status').withExactArgs(200).once().returns(this.resApi);
 
 		var clock = sinon.mock(this.clockApi).expects('uptime').returns(uptime).once();
+		var q = sinon.mock(this.qApi).expects('size').returns(qsize).once();
 
-		var metrics = require('../../../src/routes/handlers/metrics')(this.mockDB, this.clockApi);
+		var metrics = require('../../../src/routes/handlers/metrics')(this.mockDB, this.clockApi, this.qApi);
 
 		metrics.data(this.reqApi, this.resApi);
 
 		this.db.verify();
 		response.verify();
 		clock.verify();
+		q.verify();
 
 		done();
 	});
