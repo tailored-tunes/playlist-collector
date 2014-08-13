@@ -18,22 +18,26 @@ The collector accepts data via `POST` only to the root domain
 {
   "id": "xyz",
   "source": "deezer",
+  "state": "shared",
   "time": 1407248924,
   "userToken": "abc123"
 }
 ```
 
-#### source
-The name of the playlist provider
-
-#### id
+#### id - string
 The identifier of the playlist at the provider
 
-#### userToken
-The user's token whom requested to add this playlist to the system
+#### source - string
+The name of the playlist provider
 
-#### time
+#### state - string
+Could be `shared` or `unshared`
+
+#### time - integer
 Time of message creation on the user's side
+
+#### userToken - string
+The user's token whom requested to add this playlist to the system
 
 ### Response codes
 
