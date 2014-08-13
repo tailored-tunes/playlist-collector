@@ -85,4 +85,8 @@ describe('POST incorrect data', function () {
 	it('should return 400 without time', function (done) {
 		assertStatus(this.req, mockedMessages.missingTimeMessage, 400, done);
 	});
+
+	it('should return 400 without state', function (done) {
+		assertStatus(this.req, mockedMessages.missingStateMessage, 400, done);
+	});
 });
