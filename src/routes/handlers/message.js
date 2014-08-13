@@ -33,7 +33,7 @@ var required = [
 
 			var validStatuses = ['shared', 'unshared'];
 			return (validStatuses.indexOf(value) > -1);
-		}       `
+		}
 	}
 ];
 module.exports = function (q, metrics) {
