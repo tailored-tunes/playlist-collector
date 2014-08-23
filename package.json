@@ -16,6 +16,7 @@
 		"async": "*",
 		"aws-sdk": "*",
 		"body-parser": "*",
+        "cors": "*",
 		"express": "*",
 		"grunt": "*",
 		"grunt-env": "*",
