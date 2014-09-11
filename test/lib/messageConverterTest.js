@@ -6,6 +6,7 @@ var incomingMessage = {
 	'source': chance.string(),
 	'id': chance.string(),
 	'userToken': chance.string(),
+	'missingTracklistApiUrl': chance.string(),
 	'time': chance.timestamp()
 };
 

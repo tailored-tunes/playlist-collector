@@ -89,4 +89,8 @@ describe('POST incorrect data', function () {
 	it('should return 400 without state', function (done) {
 		assertStatus(this.req, mockedMessages.missingStateMessage, 400, done);
 	});
+
+	it('should return 400 without tracklist url', function (done) {
+		assertStatus(this.req, mockedMessages.missingTracklistApiUrl, 400, done);
+	});
 });
