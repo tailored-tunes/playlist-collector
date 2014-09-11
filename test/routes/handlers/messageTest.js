@@ -176,6 +176,18 @@ describe('The message handler', function () {
 		done();
 	});
 
+	it('should return 400 without tracklistApiUrl', function (done) {
+		var res = sinon.mock(this.resApi).expects('status').withArgs(400).returns(this.resApi);
+		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi);
+		var metrics = sinon.mock(this.metricsApi);
+		metrics.expects('total').once();
+		metrics.expects('invalid').once();
+		messageHandler.create({body: this.mockedMessages.missingTracklistApiUrl}, this.resApi);
+		res.verify();
+		metrics.verify();
+		done();
+	});
+
 
 	it('should push messages to the queue', function (done) {
 		this.q.expects('push').withExactArgs(this.message, sinon.match.func).callsArgWith(1, false);
