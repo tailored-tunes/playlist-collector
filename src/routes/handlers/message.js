@@ -36,7 +36,7 @@ var required = [
 		}
 	}
 ];
-module.exports = function (q, metrics) {
+module.exports = function (q, metrics, graphite) {
 	return {
 		create: function (req, res) {
 
@@ -46,13 +46,16 @@ module.exports = function (q, metrics) {
 					failure = true;
 				}
 			});
+            graphite.send('queue metrics', 'collector,queue,operation');
 			metrics.total();
 			if (!failure) {
 				metrics.valid();
 				q.push(req.body, function (err) {
 					if (err) {
+                        graphite.send('queue metrics', 'collector,queue,operation,fail');
 						metrics.fail();
 					} else {
+                        graphite.send('queue metrics', 'collector,queue,operation,success');
 						metrics.success();
 					}
 				});

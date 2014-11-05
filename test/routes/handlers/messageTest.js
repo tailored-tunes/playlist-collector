@@ -5,9 +5,11 @@ beforeEach(function () {
 	this.resApi = {status: function () {
 	}, end: function () {
 	}};
+    this.mockGraphite = {send: function(){}};
 	this.mockQ = {push: function () {
 	}};
 	this.q = sinon.mock(this.mockQ);
+	this.graphite = sinon.mock(this.mockGraphite);
 
 	this.metricsApi = {
 		total: function () {
@@ -36,8 +38,11 @@ describe('The message handler', function () {
 		var data = JSON.parse(JSON.stringify(this.mockedMessages.correctMessage));
 		data.source = 0;
 		var res = sinon.mock(this.resApi).expects('status').withArgs(400).returns(this.resApi);
-		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi);
+		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi, this.mockGraphite);
 		var metrics = sinon.mock(this.metricsApi);
+		var graphite = sinon.mock(this.mockGraphite);
+        graphite.expects('send').withArgs('queue metrics','collector,queue,operation').onCall(0);
+        graphite.expects('send').withArgs('queue metrics','collector,queue,operation,fail').onCall(1);
 		metrics.expects('total').once();
 		metrics.expects('invalid').once();
 		messageHandler.create({body: data}, this.resApi);
@@ -50,8 +55,11 @@ describe('The message handler', function () {
 		var data = JSON.parse(JSON.stringify(this.mockedMessages.correctMessage));
 		data.id = 0;
 		var res = sinon.mock(this.resApi).expects('status').withArgs(400).returns(this.resApi);
-		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi);
+		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi, this.mockGraphite);
 		var metrics = sinon.mock(this.metricsApi);
+        var graphite = sinon.mock(this.mockGraphite);
+        graphite.expects('send').withArgs('queue metrics','collector,queue,operation').onCall(0);
+        graphite.expects('send').withArgs('queue metrics','collector,queue,operation,fail').onCall(1);
 		metrics.expects('total').once();
 		metrics.expects('invalid').once();
 		messageHandler.create({body: data}, this.resApi);
@@ -64,8 +72,11 @@ describe('The message handler', function () {
 		var data = JSON.parse(JSON.stringify(this.mockedMessages.correctMessage));
 		data.userToken = 0;
 		var res = sinon.mock(this.resApi).expects('status').withArgs(400).returns(this.resApi);
-		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi);
+		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi, this.mockGraphite);
 		var metrics = sinon.mock(this.metricsApi);
+        var graphite = sinon.mock(this.mockGraphite);
+        graphite.expects('send').withArgs('queue metrics','collector,queue,operation').onCall(0);
+        graphite.expects('send').withArgs('queue metrics','collector,queue,operation,fail').onCall(1);
 		metrics.expects('total').once();
 		metrics.expects('invalid').once();
 		messageHandler.create({body: data}, this.resApi);
@@ -78,8 +89,11 @@ describe('The message handler', function () {
 		var data = JSON.parse(JSON.stringify(this.mockedMessages.correctMessage));
 		data.time = 'bla';
 		var res = sinon.mock(this.resApi).expects('status').withArgs(400).returns(this.resApi);
-		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi);
+		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi, this.mockGraphite);
 		var metrics = sinon.mock(this.metricsApi);
+        var graphite = sinon.mock(this.mockGraphite);
+        graphite.expects('send').withArgs('queue metrics','collector,queue,operation').onCall(0);
+        graphite.expects('send').withArgs('queue metrics','collector,queue,operation,fail').onCall(1);
 		metrics.expects('total').once();
 		metrics.expects('invalid').once();
 		messageHandler.create({body: data}, this.resApi);
@@ -92,8 +106,11 @@ describe('The message handler', function () {
 		var data = JSON.parse(JSON.stringify(this.mockedMessages.correctMessage));
 		data.state = 0;
 		var res = sinon.mock(this.resApi).expects('status').withArgs(400).returns(this.resApi);
-		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi);
+		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi, this.mockGraphite);
 		var metrics = sinon.mock(this.metricsApi);
+        var graphite = sinon.mock(this.mockGraphite);
+        graphite.expects('send').withArgs('queue metrics','collector,queue,operation').onCall(0);
+        graphite.expects('send').withArgs('queue metrics','collector,queue,operation,fail').onCall(1);
 		metrics.expects('total').once();
 		metrics.expects('invalid').once();
 		messageHandler.create({body: data}, this.resApi);
@@ -106,8 +123,11 @@ describe('The message handler', function () {
 		var data = JSON.parse(JSON.stringify(this.mockedMessages.correctMessage));
 		data.state = 'blah';
 		var res = sinon.mock(this.resApi).expects('status').withArgs(400).returns(this.resApi);
-		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi);
+		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi, this.mockGraphite);
 		var metrics = sinon.mock(this.metricsApi);
+        var graphite = sinon.mock(this.mockGraphite);
+        graphite.expects('send').withArgs('queue metrics','collector,queue,operation').onCall(0);
+        graphite.expects('send').withArgs('queue metrics','collector,queue,operation,fail').onCall(1);
 		metrics.expects('total').once();
 		metrics.expects('invalid').once();
 		messageHandler.create({body: data}, this.resApi);
@@ -118,8 +138,11 @@ describe('The message handler', function () {
 
 	it('should return 400 without source', function (done) {
 		var res = sinon.mock(this.resApi).expects('status').withArgs(400).returns(this.resApi);
-		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi);
+		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi, this.mockGraphite);
 		var metrics = sinon.mock(this.metricsApi);
+        var graphite = sinon.mock(this.mockGraphite);
+        graphite.expects('send').withArgs('queue metrics','collector,queue,operation').onCall(0);
+        graphite.expects('send').withArgs('queue metrics','collector,queue,operation,fail').onCall(1);
 		metrics.expects('total').once();
 		metrics.expects('invalid').once();
 		messageHandler.create({body: this.mockedMessages.missingSourceMessage}, this.resApi);
@@ -130,8 +153,11 @@ describe('The message handler', function () {
 
 	it('should return 400 without id', function (done) {
 		var res = sinon.mock(this.resApi).expects('status').withArgs(400).returns(this.resApi);
-		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi);
+		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi, this.mockGraphite);
 		var metrics = sinon.mock(this.metricsApi);
+        var graphite = sinon.mock(this.mockGraphite);
+        graphite.expects('send').withArgs('queue metrics','collector,queue,operation').onCall(0);
+        graphite.expects('send').withArgs('queue metrics','collector,queue,operation,fail').onCall(1);
 		metrics.expects('total').once();
 		metrics.expects('invalid').once();
 		messageHandler.create({body: this.mockedMessages.missingIdMessage}, this.resApi);
@@ -142,8 +168,11 @@ describe('The message handler', function () {
 
 	it('should return 400 without userToken', function (done) {
 		var res = sinon.mock(this.resApi).expects('status').withArgs(400).returns(this.resApi);
-		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi);
+		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi, this.mockGraphite);
 		var metrics = sinon.mock(this.metricsApi);
+        var graphite = sinon.mock(this.mockGraphite);
+        graphite.expects('send').withArgs('queue metrics','collector,queue,operation').onCall(0);
+        graphite.expects('send').withArgs('queue metrics','collector,queue,operation,fail').onCall(1);
 		metrics.expects('total').once();
 		metrics.expects('invalid').once();
 		messageHandler.create({body: this.mockedMessages.missingUserTokenMessage}, this.resApi);
@@ -154,8 +183,11 @@ describe('The message handler', function () {
 
 	it('should return 400 without time', function (done) {
 		var res = sinon.mock(this.resApi).expects('status').withArgs(400).returns(this.resApi);
-		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi);
+		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi, this.mockGraphite);
 		var metrics = sinon.mock(this.metricsApi);
+        var graphite = sinon.mock(this.mockGraphite);
+        graphite.expects('send').withArgs('queue metrics','collector,queue,operation').onCall(0);
+        graphite.expects('send').withArgs('queue metrics','collector,queue,operation,fail').onCall(1);
 		metrics.expects('total').once();
 		metrics.expects('invalid').once();
 		messageHandler.create({body: this.mockedMessages.missingTimeMessage}, this.resApi);
@@ -166,8 +198,11 @@ describe('The message handler', function () {
 
 	it('should return 400 without state', function (done) {
 		var res = sinon.mock(this.resApi).expects('status').withArgs(400).returns(this.resApi);
-		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi);
+		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi, this.mockGraphite);
 		var metrics = sinon.mock(this.metricsApi);
+        var graphite = sinon.mock(this.mockGraphite);
+        graphite.expects('send').withArgs('queue metrics','collector,queue,operation').onCall(0);
+        graphite.expects('send').withArgs('queue metrics','collector,queue,operation,fail').onCall(1);
 		metrics.expects('total').once();
 		metrics.expects('invalid').once();
 		messageHandler.create({body: this.mockedMessages.missingStateMessage}, this.resApi);
@@ -181,9 +216,12 @@ describe('The message handler', function () {
 		this.q.expects('push').withExactArgs(this.message, sinon.match.func).callsArgWith(1, false);
 		sinon.mock(this.resApi).expects('status').withArgs(sinon.match.number).returns(this.resApi);
 
-		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi);
+		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi, this.mockGraphite);
 
 		var metrics = sinon.mock(this.metricsApi);
+        var graphite = sinon.mock(this.mockGraphite);
+        graphite.expects('send').withArgs('queue metrics','collector,queue,operation').onCall(0);
+        graphite.expects('send').withArgs('queue metrics','collector,queue,operation,success').onCall(1);
 		metrics.expects('total').once();
 		metrics.expects('valid').once();
 		metrics.expects('success').once();
@@ -200,8 +238,11 @@ describe('The message handler', function () {
 		this.q.expects('push').withExactArgs(this.message, sinon.match.func).callsArgWith(1, true);
 		sinon.mock(this.resApi).expects('status').withArgs(sinon.match.number).returns(this.resApi);
 
-		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi);
+		var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi, this.mockGraphite);
 		var metrics = sinon.mock(this.metricsApi);
+        var graphite = sinon.mock(this.mockGraphite);
+        graphite.expects('send').withArgs('queue metrics','collector,queue,operation').onCall(0);
+        graphite.expects('send').withArgs('queue metrics','collector,queue,operation,fail').onCall(1);
 		metrics.expects('total').once();
 		metrics.expects('valid').once();
 		metrics.expects('fail').once();
