@@ -25,6 +25,10 @@ var required = [
 		validate: isInt
 	},
 	{
+		name: 'tracklistApiUrl',
+		validate: isString
+	},
+	{
 		name: 'state',
 		validate: function(value) {
 			if(!isString(value)) {
