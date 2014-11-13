@@ -64,9 +64,13 @@ describe('Metrics request', function () {
 
 
 describe('POST correct data', function () {
-	it('should return 202', function (done) {
+	it('should return 202 for single item', function (done) {
 		assertStatus(this.req, mockedMessages.correctMessage, 202, done);
 	});
+
+    it('should return 202 for array of items', function (done) {
+        assertStatus(this.req, mockedMessages.correctArrayMessage, 202, done);
+    });
 });
 
 describe('POST incorrect data', function () {

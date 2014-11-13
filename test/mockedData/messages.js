@@ -7,6 +7,25 @@ var correctMessage = {
 	'time': 1407248924
 };
 
+var correctArrayMessage = [
+    {
+    'source': 'deezer',
+    'state': 'shared',
+    'id': 'xyz',
+    'userToken': 'abc123',
+    'tracklistApiUrl': 'http://something',
+    'time': 1407248924
+    },
+    {
+        'source': 'spotify',
+        'state': 'shared',
+        'id': 'aaa',
+        'userToken': 'abc123',
+        'tracklistApiUrl': 'http://something',
+        'time': 1407248925
+    }
+];
+
 var missingSourceMessage = {
 	'id': 'xyz',
 	'state': 'unshared',
@@ -58,6 +77,7 @@ var missingTracklistApiUrl = {
 
 module.exports = {
 	correctMessage: correctMessage,
+	correctArrayMessage: correctArrayMessage,
 	missingSourceMessage: missingSourceMessage,
 	missingIdMessage: missingIdMessage,
 	missingUserTokenMessage: missingUserTokenMessage,

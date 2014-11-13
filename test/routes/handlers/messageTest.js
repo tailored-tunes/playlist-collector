@@ -227,7 +227,7 @@ describe('The message handler', function () {
 	});
 
 
-	it('should push messages to the queue', function (done) {
+	it('should push single messages to the queue', function (done) {
 		this.q.expects('push').withExactArgs(this.message, sinon.match.func).callsArgWith(1, false);
 		sinon.mock(this.resApi).expects('status').withArgs(sinon.match.number).returns(this.resApi);
 
@@ -247,6 +247,31 @@ describe('The message handler', function () {
 		this.q.verify();
 		done();
 	});
+
+
+    it('should push array messages to the queue', function (done) {
+
+        sinon.mock(this.resApi).expects('status').withArgs(sinon.match.number).returns(this.resApi);
+
+        var messageHandler = require('../../../src/routes/handlers/message')(this.mockQ, this.metricsApi, this.mockGraphite);
+
+        var metrics = sinon.mock(this.metricsApi);
+        var graphite = sinon.mock(this.mockGraphite);
+        for(var i=0;i<this.mockedMessages.correctArrayMessage.length;i++) {
+            this.q.expects('push').withExactArgs(this.mockedMessages.correctArrayMessage[i], sinon.match.func).callsArgWith(1, false).onCall(i);
+            graphite.expects('send').withArgs('queue metrics','collector,queue,operation').onCall(0+(2*i));
+            graphite.expects('send').withArgs('queue metrics','collector,queue,operation,success').onCall(1+(2*i));
+        }
+        metrics.expects('total').exactly(this.mockedMessages.correctArrayMessage.length);
+        metrics.expects('valid').exactly(this.mockedMessages.correctArrayMessage.length);
+        metrics.expects('success').exactly(this.mockedMessages.correctArrayMessage.length);
+
+        messageHandler.create({body: this.mockedMessages.correctArrayMessage}, this.resApi);
+
+        metrics.verify();
+        this.q.verify();
+        done();
+    });
 
 
 	it('should use the failure branch if publish failed', function (done) {
