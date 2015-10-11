@@ -18,7 +18,7 @@ describe('The publisher', function() {
 		this.mockConverter.expects('toSNSMessage').once().withArgs(this.message).returns(randomMessage);
 		this.mockSns.expects('publish').once().withArgs(randomMessage, cb).callsArgWith(1, false);
 
-		var publisher = require('../../src/lib/publisher')(this.mockSnsApi, this.converterApi);
+		var publisher = require('../../src/lib/aws-publisher')(this.mockSnsApi, this.converterApi);
 
 		publisher.store(this.message, cb);
 		assert.equal(cb.calledWith(false), true);
@@ -33,7 +33,7 @@ describe('The publisher', function() {
 		this.mockConverter.expects('toSNSMessage').once().withArgs(this.message).returns(randomMessage);
 		this.mockSns.expects('publish').once().withArgs(randomMessage, cb).callsArgWith(1, true);
 
-		var publisher = require('../../src/lib/publisher')(this.mockSnsApi, this.converterApi);
+		var publisher = require('../../src/lib/aws-publisher')(this.mockSnsApi, this.converterApi);
 
 		publisher.store(this.message, cb);
 

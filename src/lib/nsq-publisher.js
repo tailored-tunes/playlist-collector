@@ -3,7 +3,7 @@ module.exports = function (nsq, converter) {
 		store: function (message, callback) {
 			nsq.connect();
 			nsq.on('ready', function () {
-				w.publish(process.env.SNS_TOPIC, message, callback);
+				nsq.publish(process.env.SNS_TOPIC, converter.toSNSMessage(message), callback);
 			});
 		}
 	};
