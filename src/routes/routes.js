@@ -1,5 +1,9 @@
 var routes = require('express').Router();
-var publisher = require('../lib/aws.js');
+var backend = process.env.BACKEND || 'aws';
+var publisher = require('../lib/nsq.js');
+if (backend === 'aws') {
+	publisher = require('../lib/aws.js');
+}
 var graphite = require('../lib/graphite')(require('http'), process.env.GRAPHITE_HOST);
 var q = require('../lib/queue')(publisher);
 var db = require('../lib/db')();

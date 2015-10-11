@@ -6,7 +6,7 @@ AWS.config.update({
 
 var sns = new AWS.SNS({params: {TopicArn: process.env.SNS_TOPIC}});
 var messageConverter = require('./messageConverter');
-var publisher = require('./publisher')(sns, messageConverter);
+var publisher = require('./aws-publisher')(sns, messageConverter);
 
 
 module.exports = publisher;
