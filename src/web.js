@@ -1,15 +1,24 @@
-var express = require('express');
-var cors = require('cors');
-var bodyParser = require('body-parser');
+var nconf = require('nconf').argv()
+	.env().file({file: 'config/developer.json'}),
+	logger = require('winston');
 
-var routes = require('./routes/routes.js');
+logger.level = 'debug';
 
-var app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
+	var express = require('express'),
+	cors = require('cors'),
+	bodyParser = require('body-parser'),
+	routes = require('./routes/routes.js')(nconf, logger),
+	app = express();
+
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 app.use(cors());
 app.use(routes);
 
-var port = Number(process.env.PORT || 5000);
-app.listen(port);
+logger.debug('Starting server');
+var server = app.listen(Number(nconf.get('PORT') || 5000), function() {
+	logger.info("Server started, listening on port: "+server.address().port);
+});
+
+

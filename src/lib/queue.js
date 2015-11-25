@@ -1,13 +1,7 @@
 var async = require('async');
 module.exports = function(publisher) {
 	var q = async.queue(function (m, callback) {
-		publisher.store(m, function(err){
-			if(err) {
-				callback(true);
-			} else {
-				callback();
-			}
-		});
+		publisher.store(m, callback);
 	}, 10);
 
 	return {

@@ -1,0 +1,7 @@
+node_modules
+db
+reports
+coverage
+dev.json
+*.iml
+.idea

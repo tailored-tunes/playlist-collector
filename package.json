@@ -21,8 +21,11 @@
     "grunt": "*",
     "grunt-env": "*",
     "logfmt": "*",
+    "nconf": "^0.8.2",
     "node-localstorage": "*",
-    "nsqjs": "^0.7.7"
+    "nsqjs": "^0.7.7",
+    "pm2": "^0.15.10",
+    "winston": "^2.1.1"
   },
   "devDependencies": {
     "chance": "*",

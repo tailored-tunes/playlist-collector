@@ -114,5 +114,5 @@ $RECYCLE.BIN/
 ### Tailored Tunes
 reports
 coverage
-dev.json
 db
+config/developer.json

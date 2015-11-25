@@ -1,7 +1,11 @@
 var nsq = require('nsqjs');
 
-var w = new nsq.Writer(process.env.NSQ_HOST, process.env.NSQ_PORT);
+module.exports = function(config) {
 
-var messageConverter = require('./messageConverter');
-var publisher = require('./nsq-publisher')(w, messageConverter);
-module.exports = publisher;
+	var w = new nsq.Writer(config.get('NSQ_HOST'), config.get('NSQ_PORT'), {
+		messageTimeout: 1000*60*10
+	});
+
+	var messageConverter = require('./messageConverter');
+	return require('./nsq-publisher')(w, messageConverter);
+};
