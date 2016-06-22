@@ -2,11 +2,12 @@ module.exports = function (config, logger) {
 	logger.debug("Setting up routes");
 
 	var routes = require('express').Router(),
-		backend = config.get('BACKEND') || 'aws',
-		publisher = require('../lib/nsq.js')(config);
+		backend = config.get('BACKEND') || 'aws';
 
 	if (backend === 'aws') {
 		publisher = require('../lib/aws.js')(config);
+	} else {
+		publisher = require('../lib/nsq.js')(config);
 	}
 
 	var graphite = require('../lib/graphite')(require('http'), config.get('GRAPHITE_HOST'));

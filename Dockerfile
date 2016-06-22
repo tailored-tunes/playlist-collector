@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:16.04
 Maintainer hello@tailored-tunes.com
 
 RUN apt-get update
